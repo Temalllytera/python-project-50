@@ -1,7 +1,7 @@
 import json
 
 
-def generate_diff(filepath1, filepath2, output_format='stylish'):
+def generate_diff(filepath1, filepath2):
     data1 = _read_json(filepath1)
     data2 = _read_json(filepath2)
 
