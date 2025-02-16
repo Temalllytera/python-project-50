@@ -1,8 +1,10 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
-authors = ["Artem Bulavin <bulavin_artem@inbox.ru>"]
+description = "Project #2"
+authors = [
+	"Artem Bulavin <bulavin_artem@inbox.ru>"
+]
 readme = "README.md"
 packages = [
   { include = "gendiff" },
@@ -10,6 +12,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
+pyyaml = "^6.0"
 
 [tool.poetry.scripts]
 gendiff = 'gendiff.scripts.gendiff:main'

@@ -2,11 +2,12 @@ import pytest
 from gendiff.core import generate_diff
 
 
-def test_generate_diff():
-    filepath1 = 'tests/test_data/file1.json'
-    filepath2 = 'tests/test_data/file2.json'
+@pytest.mark.parametrize("format", ["json", "yml"])
+def test_generate_diff(format):
+    file1 = f"tests/test_data/file1.{format}"
+    file2 = f"tests/test_data/file2.{format}"
 
-    expected_result = """{
+    expected = """{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -15,6 +16,4 @@ def test_generate_diff():
   + verbose: true
 }"""
 
-    result = generate_diff(filepath1, filepath2)
-    assert result == expected_result, f"Unexpected result:\n{result}"
-
+    assert generate_diff(file1, file2) == expected

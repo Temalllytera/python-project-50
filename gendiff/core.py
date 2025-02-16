@@ -1,28 +1,15 @@
-import json
+from gendiff.parsers import parse_file
+from gendiff.diff_builder import build_diff
+from gendiff.formatters.stylish import format_stylish
 
 
-def generate_diff(filepath1, filepath2):
-    data1 = _read_json(filepath1)
-    data2 = _read_json(filepath2)
+def generate_diff(file_path1, file_path2, format_name='stylish'):
+    data1 = parse_file(file_path1)
+    data2 = parse_file(file_path2)
 
-    diff_lines = []
-    all_keys = sorted(set(data1.keys()) | set(data2.keys()))
+    diff = build_diff(data1, data2)
 
-    for key in all_keys:
-        if key in data1 and key not in data2:
-            diff_lines.append(f"  - {key}: {data1[key]}")
-        elif key not in data1 and key in data2:
-            diff_lines.append(f"  + {key}: {data2[key]}")
-        elif data1[key] == data2[key]:
-            diff_lines.append(f"    {key}: {data1[key]}")
-        else:
-            diff_lines.append(f"  - {key}: {data1[key]}")
-            diff_lines.append(f"  + {key}: {data2[key]}")
-
-    result = "{\n" + "\n".join(diff_lines) + "\n}"
-    return result
-
-
-def _read_json(filepath):
-    with open(filepath, 'r') as file:
-        return json.load(file)
+    if format_name == 'stylish':
+        return format_stylish(diff)
+    else:
+        raise ValueError(f"Unknown format: {format_name}")
