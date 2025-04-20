@@ -1,16 +1,18 @@
 [project]
-name = "python-project-50"
+name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Compares two configuration files and shows a difference."
 authors = [
-    {name = "bulavin"}
+    {name = "bulavin", email = "bulavin_artem@inbox.ru"}
 ]
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-]
+license = "MIT"
 
+[project.scripts]
+gendiff = "gendiff.scripts.gendiff:main"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.9"
