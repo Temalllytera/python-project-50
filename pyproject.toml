@@ -10,9 +10,21 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+pyyaml = "^6.0.2"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.12.1"
+
+[tool.ruff]
+line-length = 80
+select = ["E", "F", "I", "C90"]
+preview = true
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
 
 [build-system]
 requires = ["poetry-core"]

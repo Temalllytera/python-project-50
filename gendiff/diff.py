@@ -1,22 +1,27 @@
-def generate_diff(file_path1, file_path2):
-    import json
+from .file_parser import parse_file
 
-    with open(file_path1) as f1, open(file_path2) as f2:
-        data1 = json.load(f1)
-        data2 = json.load(f2)
+
+def generate_diff(file_path1, file_path2):
+    data1 = parse_file(file_path1)
+    data2 = parse_file(file_path2)
 
     keys = sorted(set(data1.keys()) | set(data2.keys()))
     lines = []
 
     for key in keys:
+        val1 = data1.get(key)
+        val2 = data2.get(key)
+
+        format_value = lambda v: str(v).lower() if isinstance(v, bool) else str(v)
+
         if key not in data2:
-            lines.append(f"  - {key}: {data1[key]}")
+            lines.append(f"  - {key}: {format_value(val1)}")
         elif key not in data1:
-            lines.append(f"  + {key}: {data2[key]}")
-        elif data1[key] == data2[key]:
-            lines.append(f"    {key}: {data1[key]}")
+            lines.append(f"  + {key}: {format_value(val2)}")
+        elif val1 == val2:
+            lines.append(f"    {key}: {format_value(val1)}")
         else:
-            lines.append(f"  - {key}: {data1[key]}")
-            lines.append(f"  + {key}: {data2[key]}")
+            lines.append(f"  - {key}: {format_value(val1)}")
+            lines.append(f"  + {key}: {format_value(val2)}")
 
     return "{\n" + "\n".join(lines) + "\n}"
