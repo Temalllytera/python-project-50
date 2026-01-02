@@ -17,6 +17,7 @@ gendiff = "gendiff.scripts.gendiff:main"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.12.1"
+pytest = "<8.0"
 
 [tool.ruff]
 line-length = 80
