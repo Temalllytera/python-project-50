@@ -2,8 +2,7 @@ name: SonarCloud
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
 
 jobs:
@@ -11,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -25,7 +23,8 @@ jobs:
           poetry install
 
       - name: Run tests with coverage
-        run: poetry run pytest --cov=gendiff --cov-report=xml
+        run: |
+          poetry run pytest --cov=gendiff --cov-report=xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
@@ -33,8 +32,7 @@ jobs:
           args: >
             -Dsonar.projectKey=temalllytera_python-project-50
             -Dsonar.organization=temalllytera
-            -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.python.version=3.9
+            -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
