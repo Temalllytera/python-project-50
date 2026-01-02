@@ -31,8 +31,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.projectKey=Temalllytera_python-project-50
-            -Dsonar.organization=Temalllytera
+            -Dsonar.projectKey=temalllytera_python-project-50
+            -Dsonar.organization=temalllytera
             -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
