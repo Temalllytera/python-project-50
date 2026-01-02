@@ -30,7 +30,10 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
-          organization: Temalllytera
-          projectKey: Temalllytera_python-project-50
+          args: >
+            -Dsonar.projectKey=Temalllytera_python-project-50
+            -Dsonar.organization=Temalllytera
+            -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
