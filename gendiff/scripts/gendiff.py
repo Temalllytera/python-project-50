@@ -1,43 +1,27 @@
 #!/usr/bin/env python3
 import argparse
 from pathlib import Path
+
 from gendiff import generate_diff
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Compares two configuration files and shows a difference.',
-        add_help=False
+        description='Compares two configuration files and shows a difference.'
     )
 
-    parser.add_argument(
-        'first_file',
-        type=Path,
-        help='Path to the first configuration file'
-    )
-
-    parser.add_argument(
-        'second_file',
-        type=Path,
-        help='Path to the second configuration file'
-    )
+    parser.add_argument('first_file', type=Path)
+    parser.add_argument('second_file', type=Path)
 
     parser.add_argument(
         '-f', '--format',
-        help='Set output format (default: stylish)',
+        metavar='FORMAT',
         default='stylish',
         choices=['stylish', 'flat', 'plain', 'json'],
-        metavar='FORMAT'
-    )
-
-    parser.add_argument(
-        '-h', '--help',
-        action='help',
-        help='Show this help message and exit'
+        help='set format of output'
     )
 
     args = parser.parse_args()
-
     print(generate_diff(args.first_file, args.second_file, args.format))
 
 
