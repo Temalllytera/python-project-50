@@ -3,7 +3,9 @@ import difflib
 from pathlib import Path
 
 # Импортируй свою функцию генерации диффа:
-from gendiff import generate_diff  # ← поменяй путь, если у тебя модуль иначе называется
+from gendiff import (
+    generate_diff,  # ← поменяй путь, если у тебя модуль иначе называется
+)
 
 # Пути к тестовым файлам
 FIXTURES_DIR = Path('tests/fixtures')

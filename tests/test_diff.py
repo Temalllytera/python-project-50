@@ -1,10 +1,11 @@
 import json
 import os
+
 import pytest
+
 from gendiff import generate_diff
 
-
-FIXTURES_DIR = os.path.join(os.path.dirname(__file__), 'fixtures')
+FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 
 
 def fixture_path(name):
@@ -12,11 +13,12 @@ def fixture_path(name):
 
 
 def read_fixture(name):
-    with open(fixture_path(name), 'r') as f:
+    with open(fixture_path(name), "r") as f:
         return f.read().strip()
 
 
 # ---------- BASIC FUNCTIONALITY ----------
+
 
 @pytest.mark.parametrize("ext", ["json", "yml"])
 def test_flat_diff_stylish(ext):
@@ -29,6 +31,7 @@ def test_flat_diff_stylish(ext):
 
 
 # ---------- NESTED STRUCTURES ----------
+
 
 @pytest.mark.parametrize("ext", ["json", "yml"])
 def test_nested_diff_stylish(ext):
@@ -52,6 +55,7 @@ def test_nested_diff_plain(ext):
 
 # ---------- JSON FORMAT ----------
 
+
 @pytest.mark.parametrize("ext", ["json", "yml"])
 def test_json_output_is_valid_json(ext):
     file1 = fixture_path(f"file1_nested.{ext}")
@@ -70,6 +74,7 @@ def test_json_output_is_valid_json(ext):
 
 # ---------- FORMAT SELECTION ----------
 
+
 def test_different_formats_produce_different_outputs():
     file1 = fixture_path("file1_nested.json")
     file2 = fixture_path("file2_nested.json")
@@ -85,6 +90,7 @@ def test_different_formats_produce_different_outputs():
 
 # ---------- ERROR HANDLING (CONTRACT-LEVEL) ----------
 
+
 def test_error_on_missing_file():
     with pytest.raises(Exception):
         generate_diff("not_existing_file.json", fixture_path("file2.json"))
@@ -93,7 +99,5 @@ def test_error_on_missing_file():
 def test_error_on_unknown_format():
     with pytest.raises(Exception):
         generate_diff(
-            fixture_path("file1.json"),
-            fixture_path("file2.json"),
-            "unknown"
+            fixture_path("file1.json"), fixture_path("file2.json"), "unknown"
         )
