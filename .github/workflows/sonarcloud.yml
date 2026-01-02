@@ -34,6 +34,7 @@ jobs:
             -Dsonar.projectKey=temalllytera_python-project-50
             -Dsonar.organization=temalllytera
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.python.version=3.9
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           
