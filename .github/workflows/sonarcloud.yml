@@ -32,8 +32,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.projectKey=temalllytera_python-project-50
-            -Dsonar.organization=temalllytera
+            -Dsonar.projectKey=Temalllytera_python-project-50
+            -Dsonar.organization=Temalllytera
             -Dsonar.sources=gendiff
             -Dsonar.tests=tests
             -Dsonar.python.version=3.9
