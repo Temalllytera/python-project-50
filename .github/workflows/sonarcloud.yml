@@ -33,7 +33,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=Temalllytera_python-project-50
-            -Dsonar.organization=Temalllytera
+            -Dsonar.organization=temalllytera
             -Dsonar.sources=gendiff
             -Dsonar.tests=tests
             -Dsonar.python.version=3.9
