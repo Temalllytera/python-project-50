@@ -7,27 +7,36 @@ on:
   pull_request:
 
 jobs:
-  build:
+  sonarcloud:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
-      - name: Install Poetry
-        run: pip install poetry
+      - name: Install uv
+        run: pip install uv
 
       - name: Install dependencies
-        run: poetry install
+        run: uv sync --all-extras
+
+      - name: Run linter
+        run: uv run ruff check gendiff tests
 
       - name: Run tests with coverage
-        run: poetry run pytest --cov=gendiff --cov-report=xml
+        run: uv run pytest --cov=gendiff --cov-report=xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=temalllytera_python-project-50
+            -Dsonar.organization=temalllytera
+            -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
