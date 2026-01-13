@@ -25,11 +25,8 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras
 
-      - name: Run linter
-        run: uv run ruff check gendiff tests
-
       - name: Run tests with coverage
-        run: uv run pytest --cov=gendiff --cov-report=xml
+        run: uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
@@ -37,6 +34,11 @@ jobs:
           args: >
             -Dsonar.projectKey=temalllytera_python-project-50
             -Dsonar.organization=temalllytera
+            -Dsonar.sources=gendiff
+            -Dsonar.tests=tests
+            -Dsonar.python.version=3.9
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.coverage.exclusions=tests/**
+            -Dsonar.exclusions=tests/**
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

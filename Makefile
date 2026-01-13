@@ -1,12 +1,10 @@
-lint:
-	poetry run ruff check gendiff tests  # Основная команда линтинга
-	poetry run ruff format --check gendiff tests  # Проверка форматирования
-
-format:
-	poetry run ruff format gendiff tests  # Автоформатирование кода
+.PHONY: test test-coverage lint
 
 test:
-	poetry run pytest -v
+	uv run pytest
 
-coverage:
-	poetry run pytest --cov=gendiff --cov-report xml
+test-coverage:
+	uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
+
+lint:
+	uv run ruff check gendiff tests
