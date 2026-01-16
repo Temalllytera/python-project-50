@@ -6,3 +6,5 @@
 ### SonarCloud
 ![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Temalllytera_python-project-50&metric=alert_status)
 
+![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Temalllytera_python-project-50&metric=coverage)
+

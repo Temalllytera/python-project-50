@@ -15,5 +15,7 @@ build/
 
 .coverage
 coverage.xml
+.coveragerc
 
 .DS_Store
+
