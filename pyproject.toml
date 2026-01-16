@@ -36,7 +36,3 @@ select = ["E", "F", "I", "C90"]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
-[dependency-groups]
-dev = [
-    "pytest-cov>=7.0.0",
-]
